@@ -10,24 +10,22 @@
 
 
 
-    <Grid>
+    <Grid x:Name="MyGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="415*"/>
             <ColumnDefinition Width="102*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="289*"/>
+            <RowDefinition Height="180*"/>
+            <RowDefinition Height="109*"/>
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" Grid.Column="1" x:Name="StartButton" Content="Start"  Click="StartButton_Click"/>
-
-
-        <DockPanel Grid.Row="1" Grid.Column="0" Height="136"  LastChildFill="False" Margin="140,153,83,0" VerticalAlignment="Top">
-
-            <ListBox x:Name="PlayerColorPalette" Height="140"  Width="192" Margin="0,0,0,-4"  />
-
+        <DockPanel Grid.Row="2" Grid.Column="0" Height="99"  LastChildFill="False" Margin="140,10,160,0" VerticalAlignment="Top">
+            <ListBox x:Name="PlayerColorPalette"  Width="115" Margin="0,0,0,-4"  />
         </DockPanel>
+        <Button x:Name="OkButton" Content="Ok" HorizontalAlignment="Left" Margin="330,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.667,1" Click="OkButton_Click"/>
     </Grid>
 
 
