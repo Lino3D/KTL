@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.Classes;
 
 namespace WPF
 {
@@ -21,9 +22,22 @@ namespace WPF
     /// </summary>
     public partial class MainWindow
     {
+        private Windows.SettingsWindow SettingsWindow;
+        public Settings Settings1 { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow = new Windows.SettingsWindow();
+            SettingsWindow.ShowDialog();
+            if (SettingsWindow.Settings != null)
+                Settings1 = SettingsWindow.Settings;
+
         }
     }
 }
