@@ -36,10 +36,18 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
-
+            var lst = new List<Color>() { Color.FromRgb(100, 100, 200), Color.FromRgb(100, 0, 200), Color.FromRgb(100, 100, 0), Color.FromRgb(100, 100, 150), Color.FromRgb(100, 200, 150), Color.FromRgb(100, 100, 150) };
+            PlayerColorPalette.DrawListBox(lst);
 
         }
 
+
+        private void RefreshMainWindow()
+        {           
+           // PlayerColorPalette.DrawListBox(lst);
+            if( Settings1 != null)
+            AllColorsPalette.DrawListBox(Settings1.ColorList);
+        }
 
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
