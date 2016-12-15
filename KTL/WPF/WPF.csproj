@@ -64,6 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\GameCell.cs" />
+    <Compile Include="Classes\GameColor.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Helpers\MainDrawing.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
