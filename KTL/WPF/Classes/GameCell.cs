@@ -11,6 +11,7 @@ namespace WPF.Classes
     {
         public int CellNumber { get; set; }
         public GameColor Color { get; set; }
+     
 
 
     }

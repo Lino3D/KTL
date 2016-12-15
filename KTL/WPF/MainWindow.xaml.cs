@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,6 +30,8 @@ namespace WPF
         public List<GameColor> AllColors;
         public List<GameCell> GameBoard;
         public List<GameColor> CurrentRoundColors;
+
+        public GameCell CurentCell;
         private static readonly Random Rand = new Random();
         public MainWindow()
         {
@@ -70,8 +73,25 @@ namespace WPF
         private void InitializeGame()
         {
             Settings = SettingsWindow.Settings;
+            InitializeGameBoard();
             InitializeAllColors();
             InitializeCurrentRoundColors();
+
+        }
+
+        private void InitializeGameBoard()
+        {
+            GameBoard = new List<GameCell>();
+            for (int i = 0; i < Settings.BoardLength; i++)
+            {
+                GameBoard.Add(new GameCell() {CellNumber = i, Color = new GameColor()});
+            }
+
+            foreach (var item in GameBoard)
+            {
+                
+            }
+
 
         }
 
@@ -90,6 +110,18 @@ namespace WPF
             for (int i = 0; i < Settings.AllColors; i++)
             {
                 AllColors.Add(new GameColor(i, Color.FromArgb((byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255), 255)));
+            }
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PlayerColorPalette.SelectedItems != null)
+            {
+                var chosenColor = CurrentRoundColors[PlayerColorPalette.SelectedIndex];
+            }
+            else
+            {
+                MessageBox.Show("Proszę wybrać Kolor");
             }
         }
     }
