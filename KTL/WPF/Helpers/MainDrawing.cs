@@ -15,16 +15,19 @@ namespace WPF.Helpers
 
         public static  void DrawListBox( this ListBox lstBox, List<Color> colors)
         {
-            int id = 0;
+            //int id = 0;
             foreach (var item in colors)
             {
-                var myRectangle = new Rectangle();
-                myRectangle.Height = 30;
-                myRectangle.Width = 30;
+                var myRectangle = new Rectangle
+                {
+                    Height = RectangleSize,
+                    Width = RectangleSize,
+                    Fill = new SolidColorBrush(item)
+                };
                 //myRectangle.Stroke = new SolidColorBrush(Color.FromRgb(0, 111, 0));
-                myRectangle.Fill = new SolidColorBrush(item);                
+
                 lstBox.Items.Add(myRectangle);
-                id++;
+                //id++;
             }
         }
 

@@ -24,13 +24,16 @@ namespace WPF
     public partial class MainWindow
     {
         private Windows.SettingsWindow SettingsWindow;
-        public Settings Settings1 { get; private set; }
+        public Settings Settings { get; private set; }
 
+        public List<GameColor> AllColors;
+        public List<GameCell> GameBoard;
+        public List<GameColor> CurrentRoundColors;
+        private static readonly Random Rand = new Random();
         public MainWindow()
         {
             InitializeComponent();
-            var lst = new List<Color>() { Color.FromRgb(100, 100, 200), Color.FromRgb(100, 0, 200), Color.FromRgb(100, 100, 0), Color.FromRgb(100, 100, 150), Color.FromRgb(100, 200, 150), Color.FromRgb(100, 100, 150) };
-            PlayerColorPalette.DrawListBox(lst);
+
 
         }
 
@@ -38,11 +41,47 @@ namespace WPF
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            HandleSettings();
+        }
+
+        private void HandleSettings()
+        {
             SettingsWindow = new Windows.SettingsWindow();
             SettingsWindow.ShowDialog();
             if (SettingsWindow.Settings != null)
-                Settings1 = SettingsWindow.Settings;
+            {
+                InitializeGame();
+            }
+            else
+            {
+                MessageBox.Show("Please set game settings first");
+            }
+        }
 
+        private void InitializeGame()
+        {
+            Settings = SettingsWindow.Settings;
+            InitializeAllColors();
+            InitializeCurrentRoundColors();
+
+        }
+
+        private void InitializeCurrentRoundColors()
+        {
+
+            CurrentRoundColors = new List<GameColor>();
+            CurrentRoundColors = AllColors.OrderBy(x => Rand.Next()).Take(Settings.RoundColors).ToList();
+            PlayerColorPalette.DrawListBox(CurrentRoundColors.Select(x => x.Color).ToList());
+        }
+
+        private void InitializeAllColors()
+        {
+            AllColors = new List<GameColor>();
+
+            for (int i = 0; i < Settings.AllColors; i++)
+            {
+                AllColors.Add(new GameColor(i, Color.FromArgb((byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255), 255)));
+            }
         }
     }
 }

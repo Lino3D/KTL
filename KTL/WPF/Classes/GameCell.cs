@@ -9,8 +9,8 @@ namespace WPF.Classes
 {
     public class GameCell
     {
-        public int Id { get; set; }
-        public Color Color { get; set; }
+        public int CellNumber { get; set; }
+        public GameColor Color { get; set; }
 
 
     }

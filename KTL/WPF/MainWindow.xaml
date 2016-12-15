@@ -23,10 +23,9 @@
         <Button Grid.Row="0" Grid.Column="1" x:Name="StartButton" Content="Start"  Click="StartButton_Click"/>
 
 
-        <DockPanel Grid.Row="1" Grid.Column="0" Height="136"  LastChildFill="False" Margin="10,143,0,0" VerticalAlignment="Top" Width="288">
+        <DockPanel Grid.Row="1" Grid.Column="0" Height="136"  LastChildFill="False" Margin="140,153,83,0" VerticalAlignment="Top">
 
-            <ListBox x:Name="PlayerColorPalette" Height="140"  Width="210"  />
-            <TextBox x:Name="textBox" Height="136" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="132"/>
+            <ListBox x:Name="PlayerColorPalette" Height="140"  Width="192" Margin="0,0,0,-4"  />
 
         </DockPanel>
     </Grid>
