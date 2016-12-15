@@ -36,18 +36,16 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
-            var lst = new List<Color>() { Color.FromRgb(100, 100, 200), Color.FromRgb(100, 0, 200), Color.FromRgb(100, 100, 0), Color.FromRgb(100, 100, 150), Color.FromRgb(100, 200, 150), Color.FromRgb(100, 100, 150) };
-            PlayerColorPalette.DrawListBox(lst);
-            AllColorsPalette.DrawListBox(lst);
-
         }
 
 
         private void RefreshMainWindow()
-        {           
-           // PlayerColorPalette.DrawListBox(lst);
-          //  if( Settings != null)
-         //   AllColorsPalette.DrawListBox(Settings.ColorList);
+        {
+            // PlayerColorPalette.DrawListBox(lst);
+            //  if( Settings != null)
+            //   AllColorsPalette.DrawListBox(Settings.ColorList);
+            PlayerColorPalette.DrawListBox(CurrentRoundColors.Select(x => x.Color).ToList());
+            AllColorsPalette.DrawListBox(AllColors.Select(x => x.Color).ToList());
         }
 
 
@@ -76,6 +74,7 @@ namespace WPF
             InitializeGameBoard();
             InitializeAllColors();
             InitializeCurrentRoundColors();
+            RefreshMainWindow();
 
         }
 
