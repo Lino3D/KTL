@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.Helpers;
 
 namespace WPF
 {
@@ -24,6 +25,9 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
+            var lst = new List<Color>() { Color.FromRgb(0, 111, 111), Color.FromRgb(10, 111, 1), Color.FromRgb(90, 150, 200), Color.FromRgb(0, 111, 111), Color.FromRgb(10, 111, 1), Color.FromRgb(90, 150, 200) };
+            PlayerColorPalette.DrawListBox(lst);
+
         }
     }
 }

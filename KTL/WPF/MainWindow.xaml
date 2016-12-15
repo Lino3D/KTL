@@ -6,10 +6,21 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    
-    
-    
-    <Grid/>
+        Title="MainWindow" Height="430.862" Width="628.927">
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="39*"/>
+        </Grid.RowDefinitions>
+        <DockPanel HorizontalAlignment="Left" Height="136" LastChildFill="False" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="601">
+
+            <ListBox x:Name="PlayerColorPalette" Height="140"  Width="210"  Margin="0,0,423,-4"/>
+
+        </DockPanel>
+
+    </Grid>
 </Controls:MetroWindow>
     
