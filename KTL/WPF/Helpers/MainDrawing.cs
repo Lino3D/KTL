@@ -14,7 +14,7 @@ namespace WPF.Helpers
     {
         private static int RectangleSize = 30;
 
-        public static  void DrawListBox( this ListBox lstBox, List<ColorStruct> colors)
+        public static  void DrawListBox( this ListBox lstBox, List<Color> colors)
         {
             int id = 0;
             foreach (var item in colors)
@@ -22,14 +22,14 @@ namespace WPF.Helpers
                 var myRectangle = new Rectangle();
                 Label MyLabel = new Label();
 
-                MyLabel.Content = item.Id.ToString();
-                MyLabel.Background = new SolidColorBrush(item.color); 
+                MyLabel.Content = item.ToString();
+                MyLabel.Background = new SolidColorBrush(item); 
                     
                 //myWrapPanel.set
                 //myRectangle.Height = RectangleSize;
                 //myRectangle.Width = RectangleSize;
                 //myRectangle.Stroke = new SolidColorBrush(Color.FromRgb(0, 111, 0));
-                myRectangle.Fill = new SolidColorBrush(item.color);                
+                myRectangle.Fill = new SolidColorBrush(item);                
                 lstBox.Items.Add(MyLabel);
                 id++;
             }
