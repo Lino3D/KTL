@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static WPF.Classes.Settings;
 
 namespace WPF.Helpers
 {
@@ -13,17 +14,23 @@ namespace WPF.Helpers
     {
         private static int RectangleSize = 30;
 
-        public static  void DrawListBox( this ListBox lstBox, List<Color> colors)
+        public static  void DrawListBox( this ListBox lstBox, List<ColorStruct> colors)
         {
             int id = 0;
             foreach (var item in colors)
             {
                 var myRectangle = new Rectangle();
-                myRectangle.Height = 30;
-                myRectangle.Width = 30;
+                Label MyLabel = new Label();
+
+                MyLabel.Content = item.Id.ToString();
+                MyLabel.Background = new SolidColorBrush(item.color); 
+                    
+                //myWrapPanel.set
+                //myRectangle.Height = RectangleSize;
+                //myRectangle.Width = RectangleSize;
                 //myRectangle.Stroke = new SolidColorBrush(Color.FromRgb(0, 111, 0));
-                myRectangle.Fill = new SolidColorBrush(item);                
-                lstBox.Items.Add(myRectangle);
+                myRectangle.Fill = new SolidColorBrush(item.color);                
+                lstBox.Items.Add(MyLabel);
                 id++;
             }
         }

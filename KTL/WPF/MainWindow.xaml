@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="382.812" Width="593.608">
 
 
 
@@ -16,19 +16,23 @@
             <ColumnDefinition Width="102*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="289*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="291*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="1" x:Name="StartButton" Content="Start"  Click="StartButton_Click"/>
+        <Button Grid.Row="0" Grid.Column="1" x:Name="StartButton" Content="Start"  Click="StartButton_Click" Margin="10,10,10,26"/>
 
+        <DockPanel Grid.Row="1" Grid.Column="0" Height="136"  LastChildFill="False" Margin="10,145,172,0" VerticalAlignment="Top">
 
-        <DockPanel Grid.Row="1" Grid.Column="0" Height="136"  LastChildFill="False" Margin="10,143,0,0" VerticalAlignment="Top" Width="288">
-
-            <ListBox x:Name="PlayerColorPalette" Height="140"  Width="210"  />
-            <TextBox x:Name="textBox" Height="136" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="132"/>
+            <ListBox x:Name="PlayerColorPalette"  Width="90" BorderThickness="1" Margin="0,0,0,10"  />
+            <Button x:Name="button" Content="Confirm" Height="21" VerticalAlignment="Top"  Width="81" Margin="10,10,10,10"  />
 
         </DockPanel>
+        <DockPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="100" LastChildFill="False" VerticalAlignment="Top" Margin="10,10,0,0" Width="100">
+            <ListBox x:Name="AllColorsPalette" Height="100" VerticalAlignment="Top" Width="100" BorderThickness="1"/>
+        </DockPanel>
+
+
     </Grid>
 
 
