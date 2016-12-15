@@ -38,14 +38,17 @@ namespace WPF
             InitializeComponent();
         }
 
+        private void RefreshMainWindowOnInitialization()
+        {
+            PlayerColorPalette.DrawListBox(CurrentRoundColors);
+            AllColorsPalette.DrawListBox(AllColors);
+            GameBoardPalette.DrawListBox(GameBoard);
+        }
 
         private void RefreshMainWindow()
         {
-            // PlayerColorPalette.DrawListBox(lst);
-            //  if( Settings != null)
-            //   AllColorsPalette.DrawListBox(Settings.ColorList);
-            PlayerColorPalette.DrawListBox(CurrentRoundColors.Select(x => x.Color).ToList());
-            AllColorsPalette.DrawListBox(AllColors.Select(x => x.Color).ToList());
+            AllColorsPalette.DrawListBox(AllColors);
+            GameBoardPalette.DrawListBox(GameBoard);
         }
 
 
@@ -74,7 +77,7 @@ namespace WPF
             InitializeGameBoard();
             InitializeAllColors();
             InitializeCurrentRoundColors();
-            RefreshMainWindow();
+            RefreshMainWindowOnInitialization();
 
         }
 
@@ -99,7 +102,7 @@ namespace WPF
 
             CurrentRoundColors = new List<GameColor>();
             CurrentRoundColors = AllColors.OrderBy(x => Rand.Next()).Take(Settings.RoundColors).ToList();
-            PlayerColorPalette.DrawListBox(CurrentRoundColors.Select(x => x.Color).ToList());
+            PlayerColorPalette.DrawListBox(CurrentRoundColors);
         }
 
         private void InitializeAllColors()
@@ -108,7 +111,7 @@ namespace WPF
 
             for (int i = 0; i < Settings.AllColors; i++)
             {
-                AllColors.Add(new GameColor(i, Color.FromArgb((byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255), 255)));
+                AllColors.Add(new GameColor(i + 1, Color.FromArgb((byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255), 255)));
             }
         }
 

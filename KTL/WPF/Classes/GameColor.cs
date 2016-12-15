@@ -20,8 +20,8 @@ namespace WPF.Classes
 
         public GameColor()
         {
-            ColorId = -1;
-            Color = Color.FromRgb(0, 0, 0);
+            ColorId = 0;
+            Color = Color.FromRgb(180, 180, 180);
         }
 
     }
