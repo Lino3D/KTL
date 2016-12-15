@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="WPF.SettingsWindow"
+﻿<Controls:MetroWindow x:Class="WPF.Windows.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,17 +20,17 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="25" Grid.Column="1"/>
-        <Button x:Name="Cancel" Content="Anuluj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="25"/>
+        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="25" Grid.Column="1" Click="Ok_Click"/>
+        <Button x:Name="Cancel" Content="Anuluj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="25" Click="Cancel_Click"/>
         <Label x:Name="SettingsLabel" Content="Ustawienia" HorizontalAlignment="Left" Margin="105,0,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
         <Label x:Name="AllColorsLabel" Content="Liczba wszystkich kolorów" HorizontalAlignment="Left" Margin="0,14,0,0" Grid.Row="1" VerticalAlignment="Top" Width="195" Height="26"/>
         <Label x:Name="RoundColorsLabel" Content="Liczba losowanych kolorów" HorizontalAlignment="Left" Margin="0,14,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.526,0.769" Height="26" Width="180"/>
         <Label x:Name="BoardLengthLabel" Content="Długość Planszy" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="170"/>
         <Label x:Name="SeriesLengthLabel" Content="Długość ciągu" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="135"/>
-        <TextBox x:Name="AllColorsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" Grid.Row="1" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="120" ToolTip="Liczba wszystkich dostępnych kolorów podczas gry"/>
-        <TextBox x:Name="RoundColorsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" Grid.Row="2" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="120" ToolTip="Liczba kolorów dostępnych dla gracza 2 podczas rundy"/>
-        <TextBox x:Name="BoardLengthTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="120" ToolTip="Długość plańszy"/>
-        <TextBox x:Name="SeriesLengthTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="4" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="120" ToolTip="Liczba 'k'"/>
+        <TextBox x:Name="AllColorsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" Grid.Row="1" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="120" ToolTip="Liczba wszystkich dostępnych kolorów podczas gry" PreviewTextInput="AllColorsTextBox_PreviewTextInput"/>
+        <TextBox x:Name="RoundColorsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" Grid.Row="2" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="120" ToolTip="Liczba kolorów dostępnych dla gracza 2 podczas rundy" PreviewTextInput="RoundColorsTextBox_PreviewTextInput"/>
+        <TextBox x:Name="BoardLengthTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap" Text="15" VerticalAlignment="Top" Width="120" ToolTip="Długość plańszy" PreviewTextInput="BoardLengthTextBox_PreviewTextInput"/>
+        <TextBox x:Name="SeriesLengthTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Grid.Row="4" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="120" ToolTip="Liczba 'k'" PreviewTextInput="SeriesLengthTextBox_PreviewTextInput"/>
 
     </Grid>
 </Controls:MetroWindow>

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPF.Helpers;
+using WPF.Classes;
 
 namespace WPF
 {
@@ -22,11 +22,21 @@ namespace WPF
     /// </summary>
     public partial class MainWindow
     {
+        private Windows.SettingsWindow SettingsWindow;
+        public Settings Settings1 { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            var lst = new List<Color>() { Color.FromRgb(0, 111, 111), Color.FromRgb(10, 111, 1), Color.FromRgb(90, 150, 200), Color.FromRgb(0, 111, 111), Color.FromRgb(10, 111, 1), Color.FromRgb(90, 150, 200) };
-            PlayerColorPalette.DrawListBox(lst);
+
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow = new Windows.SettingsWindow();
+            SettingsWindow.ShowDialog();
+            if (SettingsWindow.Settings != null)
+                Settings1 = SettingsWindow.Settings;
 
         }
     }
