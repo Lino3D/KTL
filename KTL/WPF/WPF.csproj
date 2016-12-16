@@ -51,10 +51,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>45AD41CB71F4FA5EF01D3432E9D6A0A847E6CD99</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>123CF4A6A22039C77535EC4EBBC53C0E592B2DAF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WPF_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -178,6 +179,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\grid.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\grid2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\grid3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\grid4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

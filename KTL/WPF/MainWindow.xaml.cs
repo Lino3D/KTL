@@ -112,7 +112,7 @@ namespace WPF
 
             for (int i = 0; i < Settings.AllColors; i++)
             {
-                AllColors.Add(new GameColor(i + 1, Color.FromArgb((byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255), 255)));
+                AllColors.Add(new GameColor(i + 1, Color.FromArgb(255,(byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255))));
             }
         }
 
