@@ -6,40 +6,72 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="370.88" Width="578.693">
+        Title="MainWindow" Height="370.88" Width="578.693" BorderThickness="3">
 
 
 
-    <Grid x:Name="MyGrid">
+    <Grid x:Name="MyGrid" Background="#FF137EC9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="415*"/>
             <ColumnDefinition Width="102*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="19*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="107"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="1" x:Name="StartButton" Content="Start"  Click="StartButton_Click" Margin="10"/>
-        <DockPanel Grid.Row="2" Grid.Column="0" Height="99"  LastChildFill="False" Margin="140,10,84,0" VerticalAlignment="Top">
-            <ListBox x:Name="PlayerColorPalette"  Width="92" Margin="0,0,0,-4" BorderThickness="1"  />
-            <Button x:Name="OkButton" Content="Ok" HorizontalAlignment="Left" Margin="0,35,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.667,1" Click="OkButton_Click"/>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Start" Click="StartButton_Click" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <!--<MenuItem Header="_Manage users">
+                        <MenuItem.Icon>
+                            <Image Source="/WpfTutorialSamples;component/Images/user.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>-->
+                    <MenuItem Header="_About" Click="MenuItem_Click" />
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
         </DockPanel>
 
-        <DockPanel Grid.Row="1" Grid.Column="1" Height="156" LastChildFill="False" VerticalAlignment="Top" Margin="10,10,10,0" >
-            <ListBox x:Name="AllColorsPalette" Width="80" Margin="0,0,0,23" BorderThickness="1"  />
-        </DockPanel>
-        <DockPanel HorizontalAlignment="Left" Height="105" LastChildFill="False" VerticalAlignment="Top" Width="438" Margin="10,28,0,0" Grid.Row="1" Grid.Column="0">
-            <ListBox x:Name="GameBoardPalette" Height="49" VerticalAlignment="Top" Width="405" BorderThickness="1" >
+
+
+
+
+        <Grid Grid.Row="2"  Grid.Column="0" Background="#FF228EE8" HorizontalAlignment="Left" Width="206" Margin="0,0,0,26">
+            <ListBox x:Name="PlayerColorPalette"  Width="92" Margin="10,10,10,10" BorderThickness="1" HorizontalAlignment="Left"  />
+            <Label x:Name="label2"  Content="Pick your color" Margin="107,10,0,89" Foreground="White" />
+            <Button x:Name="OkButton" Content="Ok"  Margin="118,82,24,0" RenderTransformOrigin="0.927,0.827" Click="OkButton_Click" Height="27" VerticalAlignment="Top"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2"  Grid.Column="0" Margin="215,0,5,0" >
+            <Label x:Name="label3" Content="Game Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Click="StartButton_Click" VerticalAlignment="Top" Width="75" Margin="10,133,0,0"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Height="Auto" Background="#FF21497A" Grid.RowSpan="2" >
+            <Label x:Name="label"  Content="All Colors" Foreground="White" HorizontalAlignment="Center"/>
+            <ListBox x:Name="AllColorsPalette"  BorderThickness="1"  Margin="10,30,10,10"  />
+        </Grid>
+        <Grid  Margin="10,10,10,0" Grid.Row="1" Grid.Column="0" Height="111" VerticalAlignment="Top" Grid.RowSpan="2">
+            <ListBox x:Name="GameBoardPalette" Height="55"  BorderThickness="1" Margin="10,26,10,30" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
+            <Label x:Name="label1" Content="Game Board" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"/>
 
-        </DockPanel>
+        </Grid>
+
+
     </Grid>
 
 

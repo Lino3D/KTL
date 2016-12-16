@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF.Classes;
 using WPF.Helpers;
+using WPF.Windows;
 
 namespace WPF
 {
@@ -125,6 +126,12 @@ namespace WPF
             {
                 MessageBox.Show("Proszę wybrać Kolor");
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow about = new AboutWindow();
+            about.ShowDialog();
         }
     }
 }
