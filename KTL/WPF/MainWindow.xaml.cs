@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF.Classes;
 using WPF.Helpers;
+using WPF.Interfaces;
 using WPF.Windows;
 
 namespace WPF
@@ -32,6 +33,7 @@ namespace WPF
     {
         private Windows.SettingsWindow SettingsWindow;
         public GameEngine Engine { get; set; }
+        public IPlayer1 AIPlayer;
 
 
 
@@ -41,8 +43,9 @@ namespace WPF
         {
             InitializeComponent();
             AIMoveInProgres.Visibility = Visibility.Hidden;
-            Engine = new GameEngine();
-            PlayerGrid.IsEnabled = false;
+            Engine = new GameEngine(RefreshMainWindow);
+            AIPlayer = new BasicAIImpl(Engine);
+            PlayerGrid.IsEnabled = false;            
         }
 
         private void RefreshMainWindowOnInitialization()
@@ -53,7 +56,7 @@ namespace WPF
         }
         private void RefreshMainWindow()
         {
-            PlayerColorPalette.DrawListBox(Engine.AllColors);
+            PlayerColorPalette.DrawListBox(Engine.CurrentRoundColors);
             GameBoardPalette.DrawListBox(Engine.GameBoard);
             if (Engine.GameStatus == GameStatusEnum.Player1Turn)
             {
@@ -85,6 +88,8 @@ namespace WPF
             if (SettingsWindow.Settings != null)
             {
                 InitializeGame();
+                Engine.Player1MakeMove(AIPlayer.SelectBoardCell());
+                RefreshMainWindow();
             }
             else
             {
@@ -109,7 +114,8 @@ namespace WPF
             if (PlayerColorPalette.SelectedIndex != -1)
             {
                 var chosenColor = Engine.CurrentRoundColors[PlayerColorPalette.SelectedIndex];
-                Engine.GameStatus = GameStatusEnum.Player1Turn;
+                Engine.Player2MakeMove(chosenColor.ColorId);
+                Engine.Player1MakeMove(AIPlayer.SelectBoardCell());
             }
             else
             {

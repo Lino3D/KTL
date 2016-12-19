@@ -13,6 +13,12 @@ namespace WPF.Classes
         // Player 2 - to ten, co wybiera kolor, z losowanej listy;
         public GameStatusEnum GameStatus = GameStatusEnum.NotInitialized;
         private static readonly Random Rand = new Random();
+        private Action RefreshMainWindow;
+
+        public GameEngine(Action callback)
+        {
+            RefreshMainWindow = callback;
+        }
 
         public Settings Settings { get; set; }
 
@@ -20,14 +26,26 @@ namespace WPF.Classes
         public List<GameCell> GameBoard;
         public List<GameColor> CurrentRoundColors;
 
+        private GameCell SelectedGameCell;
+
         public void Player1MakeMove(int SelectedGameBoardItemID)
         {
+            SelectedGameCell = GameBoard.FirstOrDefault(x => x.CellNumber == SelectedGameBoardItemID);
 
+
+            GameStatus = GameStatusEnum.Player2Turn;
+            InitializeCurrentRoundColors();
+            RefreshMainWindow();
         }
 
         public void Player2MakeMove(int SeletedColorID)
         {
-
+            if (SelectedGameCell == null)
+                throw new Exception("Bład logiki gry - nie został wybrany kolor");
+            SelectedGameCell.Color = AllColors.FirstOrDefault(x => x.ColorId == SeletedColorID);
+            SelectedGameCell = null;
+            GameStatus = GameStatusEnum.Player1Turn;
+            RefreshMainWindow();
         }
 
 
