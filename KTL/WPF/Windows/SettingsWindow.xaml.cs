@@ -16,19 +16,21 @@ namespace WPF.Windows
         public SettingsWindow()
         {
             InitializeComponent();
-            DifficulityComboBox.ItemsSource = Enum.GetValues(typeof( AIDifficultyEnum )).Cast<AIDifficultyEnum>();
+            DifficulityComboBox.ItemsSource = Enum.GetValues(typeof(AIDifficultyEnum)).Cast<AIDifficultyEnum>();
             DifficulityComboBox.SelectedIndex = 1;
         }
-        
+
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            InitializeSettings();
-            this.Close();
+            if (InitializeSettings())
+                this.Close();
+            else
+                MessageBox.Show("Proszę poprawić parametry");
 
         }
 
-        private void InitializeSettings()
+        private bool InitializeSettings()
         {
             int allColors = 0;
             int roundColors = 0;
@@ -36,13 +38,17 @@ namespace WPF.Windows
             int seriesLength = 0;
             AIDifficultyEnum difficulty = AIDifficultyEnum.Medium;
 
-            int.TryParse(AllColorsTextBox.Text, out allColors);
-            int.TryParse(RoundColorsTextBox.Text, out roundColors);
-            int.TryParse(BoardLengthTextBox.Text, out boardLength);
-            int.TryParse(SeriesLengthTextBox.Text, out seriesLength);
-            difficulty = (AIDifficultyEnum) DifficulityComboBox.SelectedItem;
+            if (!int.TryParse(AllColorsTextBox.Text, out allColors)) return false;
+            if (!int.TryParse(RoundColorsTextBox.Text, out roundColors)) return false;
+            if (!int.TryParse(BoardLengthTextBox.Text, out boardLength)) return false;
+            if (!int.TryParse(SeriesLengthTextBox.Text, out seriesLength)) return false;
+            if (boardLength <= 0 || seriesLength <= 0 || roundColors <= 0 || allColors <= 0) return false;
+            if (seriesLength > boardLength || roundColors > allColors) return false;
+
+            difficulty = (AIDifficultyEnum)DifficulityComboBox.SelectedItem;
 
             Settings = new Settings(allColors, roundColors, boardLength, seriesLength, difficulty);
+            return true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

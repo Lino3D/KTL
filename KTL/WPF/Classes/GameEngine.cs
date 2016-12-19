@@ -44,10 +44,17 @@ namespace WPF.Classes
                 throw new Exception("Bład logiki gry - nie został wybrany kolor");
             SelectedGameCell.Color = AllColors.FirstOrDefault(x => x.ColorId == SeletedColorID);
             SelectedGameCell = null;
-            GameStatus = GameStatusEnum.Player1Turn;
+            if (CheckForGameEnd())
+                GameStatus = GameStatusEnum.GameOver;
+            else
+                GameStatus = GameStatusEnum.Player1Turn;
             RefreshMainWindow();
         }
 
+        private bool CheckForGameEnd()
+        {
+            return false;
+        }
 
         public void InitializeGameBoard()
         {
@@ -56,12 +63,6 @@ namespace WPF.Classes
             {
                 GameBoard.Add(new GameCell() { CellNumber = i, Color = new GameColor() });
             }
-
-            foreach (var item in GameBoard)
-            {
-
-            }
-
         }
 
         public void InitializeCurrentRoundColors()
