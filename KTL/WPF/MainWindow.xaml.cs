@@ -20,36 +20,56 @@ using WPF.Windows;
 
 namespace WPF
 {
+    // Nasza gra:
+    // (b) Gra komputer kontra człowiek
+    // Komp optymalizuje pod kątem wyboru numerku na planszy
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
         private Windows.SettingsWindow SettingsWindow;
-        public Settings Settings { get; private set; }
+        public GameEngine Engine { get; set; }
 
-        public List<GameColor> AllColors;
-        public List<GameCell> GameBoard;
-        public List<GameColor> CurrentRoundColors;
+
 
         public GameCell CurentCell;
-        private static readonly Random Rand = new Random();
+        
         public MainWindow()
         {
             InitializeComponent();
+            AIMoveInProgres.Visibility = Visibility.Hidden;
+            Engine = new GameEngine();
+            PlayerGrid.IsEnabled = false;
         }
 
         private void RefreshMainWindowOnInitialization()
         {
-            PlayerColorPalette.DrawListBox(CurrentRoundColors);
-            AllColorsPalette.DrawListBox(AllColors);
-            GameBoardPalette.DrawListBox(GameBoard);
+            PlayerColorPalette.DrawListBox(Engine.CurrentRoundColors);
+            AllColorsPalette.DrawListBox(Engine.AllColors);
+            GameBoardPalette.DrawListBox(Engine.GameBoard);
         }
-
         private void RefreshMainWindow()
         {
-            AllColorsPalette.DrawListBox(AllColors);
-            GameBoardPalette.DrawListBox(GameBoard);
+            PlayerColorPalette.DrawListBox(Engine.AllColors);
+            GameBoardPalette.DrawListBox(Engine.GameBoard);
+            if (Engine.GameStatus == GameStatusEnum.Player1Turn)
+            {
+                PlayerGrid.IsEnabled = false;
+                AIMoveInProgres.Visibility = Visibility.Visible;
+            }
+            else if (Engine.GameStatus == GameStatusEnum.Player2Turn)
+            {
+                PlayerGrid.IsEnabled = true;
+                AIMoveInProgres.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void PrintTurnInfo()
+        {
+        
         }
 
 
@@ -74,53 +94,22 @@ namespace WPF
 
         private void InitializeGame()
         {
-            Settings = SettingsWindow.Settings;
-            InitializeGameBoard();
-            InitializeAllColors();
-            InitializeCurrentRoundColors();
+            Engine.Settings = SettingsWindow.Settings;
+            Engine.InitializeGameBoard();
+            Engine.InitializeAllColors();
+            Engine.InitializeCurrentRoundColors();
             RefreshMainWindowOnInitialization();
-
+            AIDiffLabel.Content = Engine.Settings.Difficulty.ToString();
         }
 
-        private void InitializeGameBoard()
-        {
-            GameBoard = new List<GameCell>();
-            for (int i = 0; i < Settings.BoardLength; i++)
-            {
-                GameBoard.Add(new GameCell() {CellNumber = i, Color = new GameColor()});
-            }
 
-            foreach (var item in GameBoard)
-            {
-                
-            }
-
-
-        }
-
-        private void InitializeCurrentRoundColors()
-        {
-
-            CurrentRoundColors = new List<GameColor>();
-            CurrentRoundColors = AllColors.OrderBy(x => Rand.Next()).Take(Settings.RoundColors).ToList();
-            PlayerColorPalette.DrawListBox(CurrentRoundColors);
-        }
-
-        private void InitializeAllColors()
-        {
-            AllColors = new List<GameColor>();
-
-            for (int i = 0; i < Settings.AllColors; i++)
-            {
-                AllColors.Add(new GameColor(i + 1, Color.FromArgb(255,(byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255))));
-            }
-        }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PlayerColorPalette.SelectedItems != null)
+            if (PlayerColorPalette.SelectedIndex != -1)
             {
-                var chosenColor = CurrentRoundColors[PlayerColorPalette.SelectedIndex];
+                var chosenColor = Engine.CurrentRoundColors[PlayerColorPalette.SelectedIndex];
+                Engine.GameStatus = GameStatusEnum.Player1Turn;
             }
             else
             {

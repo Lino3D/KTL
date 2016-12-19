@@ -13,13 +13,16 @@ namespace WPF.Classes
         public int RoundColors { get; set; }
         public int BoardLength { get; set; }
         public int SeriesLength { get; set; }
+        public AIDifficultyEnum Difficulty { get; set; }
 
-        public Settings(int a, int b, int c, int d)
+        public Settings(int a, int b, int c, int d, AIDifficultyEnum diff)
         {
             AllColors = a;
             RoundColors = b;
             BoardLength = c;
             SeriesLength = d;
+            Difficulty = diff;
         }
+
     }
 }

@@ -45,7 +45,7 @@
 
 
 
-        <Grid Grid.Row="2"  Grid.Column="0" HorizontalAlignment="Left" Width="206" Margin="0,0,0,26">
+        <Grid Grid.Row="2" x:Name="PlayerGrid" Grid.Column="0" HorizontalAlignment="Left" Width="206" Margin="0,0,0,26">
             <ListBox x:Name="PlayerColorPalette"  Width="92" Margin="10,10,10,10" BorderThickness="1" HorizontalAlignment="Left"  />
             <Label x:Name="label2"  Content="Pick your color" Margin="107,10,0,89" Foreground="White" />
             <Button x:Name="OkButton" Content="Ok"  Margin="118,82,24,0" RenderTransformOrigin="0.927,0.827" Click="OkButton_Click" Height="27" VerticalAlignment="Top"/>
@@ -54,7 +54,10 @@
 
         <Grid Grid.Row="2"  Grid.Column="0" Margin="215,0,5,0" >
             <Label x:Name="label3" Content="Game Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+            <Label x:Name="label4" Content="Poziom SI:" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Top" Margin="0,31,0,0"/>
+            <Label x:Name="AIDiffLabel" Content="" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Top" Margin="64,31,0,0"/>
             <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Click="StartButton_Click" VerticalAlignment="Top" Width="75" Margin="10,133,0,0"/>
+           
 
         </Grid>
 
@@ -71,6 +74,7 @@
                 </ListBox.ItemsPanel>
             </ListBox>
             <Label x:Name="label1" Content="Game Board" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"/>
+            <Label x:Name="AIMoveInProgres" Content="Komputer wykonuje ruch..." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="156,0,0,0" FontSize="14" Foreground="#FFE20909"/>
 
         </Grid>
 

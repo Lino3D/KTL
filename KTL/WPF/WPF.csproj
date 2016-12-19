@@ -92,9 +92,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\AIDifficultyEnum.cs" />
     <Compile Include="Classes\GameCell.cs" />
     <Compile Include="Classes\GameColor.cs" />
+    <Compile Include="Classes\GameStatusEnum.cs" />
     <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\GameEngine.cs" />
     <Compile Include="Helpers\MainDrawing.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>

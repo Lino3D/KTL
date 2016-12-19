@@ -1,5 +1,8 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using WPF.Classes;
 
 namespace WPF.Windows
@@ -13,6 +16,8 @@ namespace WPF.Windows
         public SettingsWindow()
         {
             InitializeComponent();
+            DifficulityComboBox.ItemsSource = Enum.GetValues(typeof( AIDifficultyEnum )).Cast<AIDifficultyEnum>();
+            DifficulityComboBox.SelectedIndex = 1;
         }
         
 
@@ -29,13 +34,15 @@ namespace WPF.Windows
             int roundColors = 0;
             int boardLength = 0;
             int seriesLength = 0;
+            AIDifficultyEnum difficulty = AIDifficultyEnum.Medium;
 
             int.TryParse(AllColorsTextBox.Text, out allColors);
             int.TryParse(RoundColorsTextBox.Text, out roundColors);
             int.TryParse(BoardLengthTextBox.Text, out boardLength);
             int.TryParse(SeriesLengthTextBox.Text, out seriesLength);
+            difficulty = (AIDifficultyEnum) DifficulityComboBox.SelectedItem;
 
-            Settings = new Settings(allColors, roundColors, boardLength, seriesLength);
+            Settings = new Settings(allColors, roundColors, boardLength, seriesLength, difficulty);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
