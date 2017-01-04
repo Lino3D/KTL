@@ -27,6 +27,7 @@ namespace WPF.Classes
         public List<GameColor> CurrentRoundColors;
 
         private GameCell SelectedGameCell;
+        private GameColor LastRoundChosenColor;
 
         public void Player1MakeMove(int SelectedGameBoardItemID)
         {
@@ -43,6 +44,7 @@ namespace WPF.Classes
             if (SelectedGameCell == null)
                 throw new Exception("Bład logiki gry - nie został wybrany kolor");
             SelectedGameCell.Color = AllColors.FirstOrDefault(x => x.ColorId == SeletedColorID);
+            LastRoundChosenColor = SelectedGameCell?.Color;
             SelectedGameCell = null;
             if (CheckForGameEnd())
                 GameStatus = GameStatusEnum.GameOver;
@@ -53,6 +55,27 @@ namespace WPF.Classes
 
         private bool CheckForGameEnd()
         {
+
+            // Nie nie umiem na to napisać Linq xD. i niestety to nie jest jedyna opcja, 
+            //ciągów może być kilka. nie wiem jak to ugryźć, by nie zabić CPU. Trza się zastanowić.
+            
+            var firstIndex = GameBoard.Where(x => x.Color == LastRoundChosenColor).FirstOrDefault().CellNumber;
+            var lastIndex = GameBoard.Where(x => x.Color == LastRoundChosenColor).LastOrDefault().CellNumber;
+            var difference = (lastIndex - firstIndex) / (Settings.SeriesLength - 1);
+            if (difference != 0)
+            {
+                var counter = 0;
+                for (int i = 0; i < GameBoard.Count; i = i + difference)
+                {
+                    if (GameBoard[i].Color != LastRoundChosenColor)
+                        break;
+                    counter++;
+                }
+                if (counter == Settings.SeriesLength)
+                    return true;
+            }
+
+
             return false;
         }
 
