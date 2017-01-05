@@ -58,10 +58,13 @@ namespace WPF.Classes
 
             // Nie nie umiem na to napisać Linq xD. i niestety to nie jest jedyna opcja, 
             //ciągów może być kilka. nie wiem jak to ugryźć, by nie zabić CPU. Trza się zastanowić.
-            
-            var firstIndex = GameBoard.Where(x => x.Color == LastRoundChosenColor).FirstOrDefault().CellNumber;
-            var lastIndex = GameBoard.Where(x => x.Color == LastRoundChosenColor).LastOrDefault().CellNumber;
+            var allIndexesOfGivenColor = GameBoard.FindAll(x => x.Color == LastRoundChosenColor).OrderBy(x=>x.CellNumber)
+                .Select(x=>x.CellNumber).ToList();
+            var firstIndex = allIndexesOfGivenColor.FirstOrDefault();
+            var lastIndex = allIndexesOfGivenColor.LastOrDefault();
+
             var difference = (lastIndex - firstIndex) / (Settings.SeriesLength - 1);
+          //  var isSeries = CheckForSequence(allIndexesOfGivenColor);
             if (difference != 0)
             {
                 var counter = 0;
@@ -78,6 +81,23 @@ namespace WPF.Classes
 
             return false;
         }
+
+        public bool CheckForSequence(List<int> indexes)
+        {
+            var firstIndex = indexes.FirstOrDefault();
+            var lastIndex = indexes.LastOrDefault();
+
+            var difference = (lastIndex - firstIndex) / (Settings.SeriesLength - 1);
+
+            var isSeries = indexes.Zip(indexes.Skip(1), (a, b) => (a + difference) == b).All(x => x);
+
+            while ( !isSeries && indexes.Count >= Settings.SeriesLength -1 )
+            {
+                CheckForSequence(indexes.GetRange(indexes[0], indexes.Count - 1));
+            }
+            return isSeries;
+        }
+
 
         public void InitializeGameBoard()
         {
