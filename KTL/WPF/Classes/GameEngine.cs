@@ -60,43 +60,46 @@ namespace WPF.Classes
             //ciągów może być kilka. nie wiem jak to ugryźć, by nie zabić CPU. Trza się zastanowić.
             var allIndexesOfGivenColor = GameBoard.FindAll(x => x.Color == LastRoundChosenColor).OrderBy(x=>x.CellNumber)
                 .Select(x=>x.CellNumber).ToList();
-            var firstIndex = allIndexesOfGivenColor.FirstOrDefault();
-            var lastIndex = allIndexesOfGivenColor.LastOrDefault();
+            //  var lastIndex = allIndexesOfGivenColor.LastOrDefault();
 
-            var difference = (lastIndex - firstIndex) / (Settings.SeriesLength - 1);
-          //  var isSeries = CheckForSequence(allIndexesOfGivenColor);
-            if (difference != 0)
-            {
-                var counter = 0;
-                for (int i = 0; i < GameBoard.Count; i = i + difference)
-                {
-                    if (GameBoard[i].Color != LastRoundChosenColor)
-                        break;
-                    counter++;
-                }
-                if (counter == Settings.SeriesLength)
-                    return true;
-            }
+            if (Settings.SeriesLength == 1)
+                return true;
 
+
+       
+            CheckForSequence(allIndexesOfGivenColor);
 
             return false;
         }
 
-        public bool CheckForSequence(List<int> indexes)
+        public bool CheckForSequence(List<int> colorIndexes)
         {
-            var firstIndex = indexes.FirstOrDefault();
-            var lastIndex = indexes.LastOrDefault();
 
-            var difference = (lastIndex - firstIndex) / (Settings.SeriesLength - 1);
-
-            var isSeries = indexes.Zip(indexes.Skip(1), (a, b) => (a + difference) == b).All(x => x);
-
-            while ( !isSeries && indexes.Count >= Settings.SeriesLength -1 )
+            if ((colorIndexes.Count >= 2) && (colorIndexes.Count >= Settings.SeriesLength))
             {
-                CheckForSequence(indexes.GetRange(indexes[0], indexes.Count - 1));
+                var firstIndex = colorIndexes.FirstOrDefault();
+                var secondIndex = colorIndexes[1];
+
+                var difference = Math.Abs(secondIndex - firstIndex);
+
+                if (difference == 0) return false;
+                var counter = 1;
+                for (var i = 0; i < colorIndexes.Count; i++)
+                {
+                    if (i != colorIndexes[i])
+                        break;
+                    counter++;
+                    if (counter == Settings.SeriesLength)
+                        return true;
+                }
+                colorIndexes.RemoveRange(0,1);
+                CheckForSequence(colorIndexes);
             }
-            return isSeries;
+            return false;
         }
+
+
+
 
 
         public void InitializeGameBoard()

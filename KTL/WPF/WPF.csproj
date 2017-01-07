@@ -97,7 +97,7 @@
     <Compile Include="Classes\GameCell.cs" />
     <Compile Include="Classes\GameColor.cs" />
     <Compile Include="Classes\GameStatusEnum.cs" />
-    <Compile Include="Interfaces\IPlayer1.cs" />
+    <Compile Include="obj\IPlayer1.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\GameEngine.cs" />
     <Compile Include="Helpers\MainDrawing.cs" />
@@ -196,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\grid4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
