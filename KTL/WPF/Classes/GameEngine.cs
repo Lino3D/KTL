@@ -46,7 +46,7 @@ namespace WPF.Classes
             SelectedGameCell.Color = AllColors.FirstOrDefault(x => x.ColorId == SeletedColorID);
             LastRoundChosenColor = SelectedGameCell?.Color;
             SelectedGameCell = null;
-            if (CheckForGameEnd())  
+            if (CheckForGameEnd())
                 GameStatus = GameStatusEnum.GameOver;
             else
                 GameStatus = GameStatusEnum.Player1Turn;
@@ -58,14 +58,16 @@ namespace WPF.Classes
 
             // Nie nie umiem na to napisać Linq xD. i niestety to nie jest jedyna opcja, 
             //ciągów może być kilka. nie wiem jak to ugryźć, by nie zabić CPU. Trza się zastanowić.
-            var allIndexesOfGivenColor = GameBoard.FindAll(x => x.Color == LastRoundChosenColor).OrderBy(x=>x.CellNumber)
-                .Select(x=>x.CellNumber).ToList();
+            var allIndexesOfGivenColor = GameBoard.FindAll(x => x.Color == LastRoundChosenColor).OrderBy(x => x.CellNumber)
+                .Select(x => x.CellNumber).ToList();
             //  var lastIndex = allIndexesOfGivenColor.LastOrDefault();
 
             if (Settings.SeriesLength == 1)
                 return true;
 
-             return CheckForSequence(allIndexesOfGivenColor);
+
+
+            return CheckForSequence(allIndexesOfGivenColor);
 
         }
 
@@ -75,18 +77,18 @@ namespace WPF.Classes
             {
                 int secondIndexNumber = 1;
                 var firstIndex = colorIndexes.FirstOrDefault();
-                while (Settings.SeriesLength - secondIndexNumber > 1)
+                while ((colorIndexes.Count() - secondIndexNumber + 1) - (Settings.SeriesLength) >= 0)
                 {
                     var secondIndex = colorIndexes[secondIndexNumber];
 
                     var difference = Math.Abs(secondIndex - firstIndex);
 
-                   if (difference == 0) return false;
+                    if (difference == 0) return false;
                     var counter = 0;
                     int j = firstIndex;
                     for (var i = 0; i < colorIndexes.Count; i++)
                     {
-                        if( colorIndexes.FindAll(x=> x == j).Count == 0)
+                        if (colorIndexes.FindAll(x => x == j).Count == 0)
                             break;
                         j = j + difference;
                         counter++;
@@ -95,8 +97,8 @@ namespace WPF.Classes
                     }
                     secondIndexNumber++;
                 }
-                colorIndexes.RemoveRange(0,1);
-                CheckForSequence(colorIndexes);
+                colorIndexes.RemoveRange(0, 1);
+                return CheckForSequence(colorIndexes);
             }
             return false;
         }
