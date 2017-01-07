@@ -47,6 +47,11 @@ namespace WPF.Windows
 
             difficulty = (AIDifficultyEnum)DifficulityComboBox.SelectedItem;
 
+
+            allColors = 2;
+            roundColors = 2;
+            boardLength = 10;
+            seriesLength = 3;
             Settings = new Settings(allColors, roundColors, boardLength, seriesLength, difficulty);
             return true;
         }

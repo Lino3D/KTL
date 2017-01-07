@@ -46,7 +46,7 @@ namespace WPF.Classes
             SelectedGameCell.Color = AllColors.FirstOrDefault(x => x.ColorId == SeletedColorID);
             LastRoundChosenColor = SelectedGameCell?.Color;
             SelectedGameCell = null;
-            if (CheckForGameEnd())
+            if (CheckForGameEnd())  
                 GameStatus = GameStatusEnum.GameOver;
             else
                 GameStatus = GameStatusEnum.Player1Turn;
@@ -65,35 +65,35 @@ namespace WPF.Classes
             if (Settings.SeriesLength == 1)
                 return true;
 
+             return CheckForSequence(allIndexesOfGivenColor);
 
-
-
-              CheckForSequence(allIndexesOfGivenColor);
-
-            return false;
         }
 
         public bool CheckForSequence(List<int> colorIndexes)
         {
-
             if ((colorIndexes.Count >= 2) && (colorIndexes.Count >= Settings.SeriesLength))
             {
+                int secondIndexNumber = 1;
                 var firstIndex = colorIndexes.FirstOrDefault();
-                var secondIndex = colorIndexes[1];
-
-                var difference = Math.Abs(secondIndex - firstIndex);
-
-                if (difference == 0) return false;
-                var counter = 1;
-                int j = firstIndex;
-                for (var i = 0; i < colorIndexes.Count; i++)
+                while (Settings.SeriesLength - secondIndexNumber > 1)
                 {
-                    if(colorIndexes[i]!=j)
-                        break;
-                    j = j + difference;
-                    counter++;
-                    if (counter == Settings.SeriesLength)
-                        return true;
+                    var secondIndex = colorIndexes[secondIndexNumber];
+
+                    var difference = Math.Abs(secondIndex - firstIndex);
+
+                   if (difference == 0) return false;
+                    var counter = 0;
+                    int j = firstIndex;
+                    for (var i = 0; i < colorIndexes.Count; i++)
+                    {
+                        if( colorIndexes.FindAll(x=> x == j).Count == 0)
+                            break;
+                        j = j + difference;
+                        counter++;
+                        if (counter == Settings.SeriesLength)
+                            return true;
+                    }
+                    secondIndexNumber++;
                 }
                 colorIndexes.RemoveRange(0,1);
                 CheckForSequence(colorIndexes);

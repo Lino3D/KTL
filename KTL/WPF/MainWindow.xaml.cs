@@ -68,6 +68,10 @@ namespace WPF
                 PlayerGrid.IsEnabled = true;
                 AIMoveInProgres.Visibility = Visibility.Hidden;
             }
+            if( Engine.GameStatus == GameStatusEnum.GameOver)
+            {
+                MessageBox.Show("GameOvah!!!!");
+            }
         }
 
         private void PrintTurnInfo()
