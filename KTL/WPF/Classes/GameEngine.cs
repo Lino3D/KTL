@@ -66,8 +66,9 @@ namespace WPF.Classes
                 return true;
 
 
-       
-            CheckForSequence(allIndexesOfGivenColor);
+
+
+              CheckForSequence(allIndexesOfGivenColor);
 
             return false;
         }
@@ -84,10 +85,12 @@ namespace WPF.Classes
 
                 if (difference == 0) return false;
                 var counter = 1;
+                int j = firstIndex;
                 for (var i = 0; i < colorIndexes.Count; i++)
                 {
-                    if (i != colorIndexes[i])
+                    if(colorIndexes[i]!=j)
                         break;
+                    j = j + difference;
                     counter++;
                     if (counter == Settings.SeriesLength)
                         return true;
