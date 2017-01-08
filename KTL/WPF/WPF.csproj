@@ -96,7 +96,11 @@
     <Compile Include="Classes\BasicAIImpl.cs" />
     <Compile Include="Classes\GameCell.cs" />
     <Compile Include="Classes\GameColor.cs" />
+    <Compile Include="Classes\GameStateEvaluation.cs" />
     <Compile Include="Classes\GameStatusEnum.cs" />
+    <Compile Include="Classes\Move.cs" />
+    <Compile Include="Classes\SimplieAIImpl.cs" />
+    <Compile Include="Classes\StateParticle.cs" />
     <Compile Include="Interfaces\IPlayer1.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\GameEngine.cs" />

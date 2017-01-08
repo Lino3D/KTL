@@ -18,6 +18,7 @@ namespace WPF.Classes
         public GameEngine(Action callback)
         {
             RefreshMainWindow = callback;
+
         }
 
         public Settings Settings { get; set; }
@@ -28,6 +29,8 @@ namespace WPF.Classes
 
         private GameCell SelectedGameCell;
         private GameColor LastRoundChosenColor;
+
+        private GameStateEvaluation RoundEvaluation;
 
         public void Player1MakeMove(int SelectedGameBoardItemID)
         {
@@ -65,11 +68,51 @@ namespace WPF.Classes
             if (Settings.SeriesLength == 1)
                 return true;
 
-
+            RoundEvaluation.UpdateEvaluation(LastRoundChosenColor, GameBoard);
 
             return CheckForSequence(allIndexesOfGivenColor);
 
         }
+
+        public List<Move> EvaluationFunctionPlayer1()
+        {
+            var ColorsOnGameBoard = GameBoard.Where(x => x.Color.ColorId != 0).Select(x => x.Color).Distinct();
+            if (ColorsOnGameBoard.Count() == 0)
+                return null;
+            var UncoloredCells = GameBoard.Where(x => x.Color.ColorId == 0);
+
+
+            List<Move> lst = new List<Move>();
+            foreach (var item in UncoloredCells)
+            {
+                // Sprawdz dla kazdego koloru obecnego na mapie, czy utworzy nowy ciag
+                foreach (var color in ColorsOnGameBoard)
+                {
+                    Move movement = EvaluateMove(item, color);
+                    if (movement.IsBetter)
+                        lst.Add(movement);
+                }
+            }
+
+            return lst;
+        }
+
+        private Move EvaluateMove(GameCell Cell, GameColor color)
+        {
+            var MockGameBoard = new List<GameCell>(GameBoard);
+            GameColor PreviousColor = MockGameBoard.First(x => x == Cell).Color;
+            MockGameBoard.First(x => x == Cell).Color = color;
+
+            Move movement = new Move();
+            movement.Color = color;
+            movement.GameCell = Cell;
+            movement.SeriesLength = RoundEvaluation.Evaluate(color, MockGameBoard);
+            movement.IsBetter = movement.SeriesLength > RoundEvaluation.GameStates.FirstOrDefault(x => x.color == color).LongestSeriesLength;
+            GameBoard.First(x => x == Cell).Color = PreviousColor;
+            return movement;
+        }
+
+
 
         public bool CheckForSequence(List<int> colorIndexes)
         {
@@ -133,6 +176,10 @@ namespace WPF.Classes
                 AllColors.Add(new GameColor(i + 1, Color.FromArgb(255, (byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255))));
             }
 
+        }
+        public void InitializeEvaluationFunction()
+        {
+            RoundEvaluation = new GameStateEvaluation(AllColors, Settings.SeriesLength);
         }
     }
 }

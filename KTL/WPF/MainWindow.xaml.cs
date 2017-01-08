@@ -44,7 +44,8 @@ namespace WPF
             InitializeComponent();
             AIMoveInProgres.Visibility = Visibility.Hidden;
             Engine = new GameEngine(RefreshMainWindow);
-            AIPlayer = new BasicAIImpl(Engine);
+            //AIPlayer = new BasicAIImpl(Engine);
+            AIPlayer = new SimplieAIImpl(Engine);
             PlayerGrid.IsEnabled = false;            
         }
 
@@ -107,6 +108,7 @@ namespace WPF
             Engine.InitializeGameBoard();
             Engine.InitializeAllColors();
             Engine.InitializeCurrentRoundColors();
+            Engine.InitializeEvaluationFunction();
             RefreshMainWindowOnInitialization();
             AIDiffLabel.Content = Engine.Settings.Difficulty.ToString();
         }
