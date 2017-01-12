@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="370.88" Width="578.693" BorderThickness="3">
+        Title="MainWindow" Height="381.38" Width="925.193" BorderThickness="3">
 
 
 
@@ -57,7 +57,7 @@
             <Label x:Name="label4" Content="Poziom SI:" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Top" Margin="0,31,0,0"/>
             <Label x:Name="AIDiffLabel" Content="" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Top" Margin="64,31,0,0"/>
             <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Click="StartButton_Click" VerticalAlignment="Top" Width="75" Margin="10,133,0,0"/>
-           
+
 
         </Grid>
 

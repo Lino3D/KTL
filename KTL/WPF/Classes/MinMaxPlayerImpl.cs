@@ -34,13 +34,18 @@ namespace WPF.Classes
             if (FirstStep)
             {
                 FirstStep = false;
-                return Rand.Next(0, GameEngine.GameBoard.Count);
+                selectedCell =  Rand.Next(0, GameEngine.GameBoard.Count);
+                return LastSelectedCell;
             }
 
             if (SecondStep)
             {
                 SecondStep = false;
-                return Rand.Next(0, GameEngine.GameBoard.Count);
+                int randInt = Rand.Next(0, GameEngine.GameBoard.Count);
+                while (GameEngine.GameBoard.ElementAt(randInt).Color.ColorId != 0)
+                    randInt = Rand.Next(0, GameEngine.GameBoard.Count);
+                selectedCell = randInt;
+                return LastSelectedCell;
             }
             MinMaxAlgorithm minmax = new MinMaxAlgorithm(GameEngine.Settings.SeriesLength, GameEngine.AllColors);
 

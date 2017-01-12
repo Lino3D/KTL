@@ -50,8 +50,8 @@ namespace WPF.Windows
 
             allColors = 2;
             roundColors = 2;
-            boardLength = 14;
-            seriesLength = 3;
+            boardLength = 20;
+            seriesLength = 4;
             Settings = new Settings(allColors, roundColors, boardLength, seriesLength, difficulty);
             return true;
         }
