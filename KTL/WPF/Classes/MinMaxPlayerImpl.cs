@@ -13,6 +13,8 @@ namespace WPF.Classes
         public GameEngine GameEngine;
         private Random Rand = new Random();
         private int selectedCell;
+        private bool FirstStep = true;
+        private bool SecondStep = true;
         public MinMaxPlayerImpl(GameEngine engine)
         {
             GameEngine = engine;
@@ -29,6 +31,17 @@ namespace WPF.Classes
 
         public int SelectBoardCell()
         {
+            if (FirstStep)
+            {
+                FirstStep = false;
+                return Rand.Next(0, GameEngine.GameBoard.Count);
+            }
+
+            if (SecondStep)
+            {
+                SecondStep = false;
+                return Rand.Next(0, GameEngine.GameBoard.Count);
+            }
             MinMaxAlgorithm minmax = new MinMaxAlgorithm(GameEngine.Settings.SeriesLength, GameEngine.AllColors);
 
             //      int result = minmax.RunMinMaxAlfaBetaPruning(GameEngine.GameBoard, 11);
