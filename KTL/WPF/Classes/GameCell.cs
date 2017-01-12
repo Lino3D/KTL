@@ -11,8 +11,22 @@ namespace WPF.Classes
     {
         public int CellNumber { get; set; }
         public GameColor Color { get; set; }
-     
 
+        public GameCell()
+        {
+        }
+
+        public GameCell( int _cellNum, GameColor _color)
+        {
+            CellNumber = _cellNum;
+            Color = _color;
+        }
+
+        public GameCell(GameCell gameCell)
+        {
+            this.CellNumber = gameCell.CellNumber;
+            this.Color = new GameColor(gameCell.Color.ColorId, gameCell.Color.Color);
+        }
 
     }
 }

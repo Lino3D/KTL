@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Interfaces
-{
-    public interface IPlayer1
+namespace WPF.MinMax
+{    public enum GameEndEnum
     {
-        int SelectBoardCell();
-        int LastSelectedCell { get; }
+        Player1Won = 10,
+        Player2Won = 20,
+        NotGameOverYet = 30
     }
 }

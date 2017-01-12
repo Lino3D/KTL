@@ -11,17 +11,29 @@ namespace WPF.Classes
     {
         public GameEngine GameEngine;
         private Random Rand = new Random();
+        private int selectedCell;
         public BasicAIImpl( GameEngine engine )
         {
             GameEngine = engine;
 
         }
+
+        public int LastSelectedCell
+        {
+            get
+            {
+                return selectedCell;
+            }
+        }
+
         public int SelectBoardCell()
         {
             int randInt = Rand.Next(0, GameEngine.GameBoard.Count);
             while( GameEngine.GameBoard.ElementAt(randInt).Color.ColorId !=  0)
                 randInt = Rand.Next(0, GameEngine.GameBoard.Count);
-            return randInt;
+            selectedCell = randInt;
+            return LastSelectedCell;
         }
+        
     }
 }

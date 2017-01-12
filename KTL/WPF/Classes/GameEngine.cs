@@ -35,10 +35,12 @@ namespace WPF.Classes
         public void Player1MakeMove(int SelectedGameBoardItemID)
         {
             SelectedGameCell = GameBoard.FirstOrDefault(x => x.CellNumber == SelectedGameBoardItemID);
-
-
-            GameStatus = GameStatusEnum.Player2Turn;
+                        
             InitializeCurrentRoundColors();
+            if (CheckForGameEnd())
+                GameStatus = GameStatusEnum.GameOver;
+            else
+                GameStatus = GameStatusEnum.Player2Turn;
             RefreshMainWindow();
         }
 
@@ -96,6 +98,12 @@ namespace WPF.Classes
 
             return lst;
         }
+
+        public void EvaluationFunction()
+        {
+
+        }
+
 
         private Move EvaluateMove(GameCell Cell, GameColor color)
         {
@@ -156,7 +164,8 @@ namespace WPF.Classes
             for (int i = 0; i < Settings.BoardLength; i++)
             {
                 GameBoard.Add(new GameCell() { CellNumber = i, Color = new GameColor() });
-            }
+            }   
+
         }
 
         public void InitializeCurrentRoundColors()
@@ -175,6 +184,19 @@ namespace WPF.Classes
             {
                 AllColors.Add(new GameColor(i + 1, Color.FromArgb(255, (byte)Rand.Next(255), (byte)Rand.Next(255), (byte)Rand.Next(255))));
             }
+            //GameBoard.ElementAt(0).Color = AllColors.ElementAt(0);
+            //GameBoard.ElementAt(1).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(2).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(3).Color = AllColors.ElementAt(0);
+            //GameBoard.ElementAt(4).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(5).Color = AllColors.ElementAt(1);
+
+            //GameBoard.ElementAt(2).Color = AllColors.ElementAt(0);
+            //GameBoard.ElementAt(3).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(4).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(5).Color = AllColors.ElementAt(0);
+            //GameBoard.ElementAt(6).Color = AllColors.ElementAt(1);
+            //GameBoard.ElementAt(7).Color = AllColors.ElementAt(1);
 
         }
         public void InitializeEvaluationFunction()

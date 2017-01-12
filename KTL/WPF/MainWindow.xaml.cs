@@ -38,15 +38,16 @@ namespace WPF
 
 
         public GameCell CurentCell;
-        
+
         public MainWindow()
         {
             InitializeComponent();
             AIMoveInProgres.Visibility = Visibility.Hidden;
+            //    GameBoardPalette.IsEnabled = false;
             Engine = new GameEngine(RefreshMainWindow);
             //AIPlayer = new BasicAIImpl(Engine);
-            AIPlayer = new SimplieAIImpl(Engine);
-            PlayerGrid.IsEnabled = false;            
+            AIPlayer = new MinMaxPlayerImpl(Engine);
+            PlayerGrid.IsEnabled = false;
         }
 
         private void RefreshMainWindowOnInitialization()
@@ -54,11 +55,13 @@ namespace WPF
             PlayerColorPalette.DrawListBox(Engine.CurrentRoundColors);
             AllColorsPalette.DrawListBox(Engine.AllColors);
             GameBoardPalette.DrawListBox(Engine.GameBoard);
+
         }
         private void RefreshMainWindow()
         {
             PlayerColorPalette.DrawListBox(Engine.CurrentRoundColors);
             GameBoardPalette.DrawListBox(Engine.GameBoard);
+            GameBoardPalette.SelectedIndex = AIPlayer.LastSelectedCell;
             if (Engine.GameStatus == GameStatusEnum.Player1Turn)
             {
                 PlayerGrid.IsEnabled = false;
@@ -69,15 +72,16 @@ namespace WPF
                 PlayerGrid.IsEnabled = true;
                 AIMoveInProgres.Visibility = Visibility.Hidden;
             }
-            if( Engine.GameStatus == GameStatusEnum.GameOver)
+            if (Engine.GameStatus == GameStatusEnum.GameOver)
             {
+                GameBoardPalette.SelectedIndex = -1;
                 MessageBox.Show("GameOvah!!!!");
             }
         }
 
         private void PrintTurnInfo()
         {
-        
+
         }
 
 
@@ -121,7 +125,8 @@ namespace WPF
             {
                 var chosenColor = Engine.CurrentRoundColors[PlayerColorPalette.SelectedIndex];
                 Engine.Player2MakeMove(chosenColor.ColorId);
-                Engine.Player1MakeMove(AIPlayer.SelectBoardCell());
+                if (Engine.GameStatus != GameStatusEnum.GameOver)
+                    Engine.Player1MakeMove(AIPlayer.SelectBoardCell());
             }
             else
             {
