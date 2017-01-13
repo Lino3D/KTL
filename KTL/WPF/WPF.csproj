@@ -98,6 +98,7 @@
     <Compile Include="Classes\GameColor.cs" />
     <Compile Include="Classes\GameStateEvaluation.cs" />
     <Compile Include="Classes\GameStatusEnum.cs" />
+    <Compile Include="Classes\GameWinnerEnum.cs" />
     <Compile Include="Classes\MinMaxPlayerImpl.cs" />
     <Compile Include="Classes\Move.cs" />
     <Compile Include="Classes\SimplieAIImpl.cs" />

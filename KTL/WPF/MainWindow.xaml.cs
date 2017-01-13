@@ -75,7 +75,7 @@ namespace WPF
             if (Engine.GameStatus == GameStatusEnum.GameOver)
             {
                 GameBoardPalette.SelectedIndex = -1;
-                MessageBox.Show("GameOvah!!!!");
+                MessageBox.Show("GameOver!" +"\n Wygrał gracz: "+ Engine.GameResutl.ToString()  );
             }
         }
 

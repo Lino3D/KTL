@@ -12,6 +12,7 @@ namespace WPF.Classes
         // Player 1  - to ten, co wybieranumerek na planszy
         // Player 2 - to ten, co wybiera kolor, z losowanej listy;
         public GameStatusEnum GameStatus = GameStatusEnum.NotInitialized;
+        public GameWinnerEnum GameResutl = GameWinnerEnum.NotYet;
         private static readonly Random Rand = new Random();
         private Action RefreshMainWindow;
 
@@ -60,7 +61,7 @@ namespace WPF.Classes
 
         private bool CheckForGameEnd()
         {
-
+            GameResutl = GameWinnerEnum.NotYet;
             // Nie nie umiem na to napisać Linq xD. i niestety to nie jest jedyna opcja, 
             //ciągów może być kilka. nie wiem jak to ugryźć, by nie zabić CPU. Trza się zastanowić.
             var allIndexesOfGivenColor = GameBoard.FindAll(x => x.Color == LastRoundChosenColor).OrderBy(x => x.CellNumber)
@@ -68,11 +69,19 @@ namespace WPF.Classes
             //  var lastIndex = allIndexesOfGivenColor.LastOrDefault();
 
             if (Settings.SeriesLength == 1)
-                return true;
+                GameResutl = GameWinnerEnum.Player1Won;
 
             RoundEvaluation.UpdateEvaluation(LastRoundChosenColor, GameBoard);
 
-            return CheckForSequence(allIndexesOfGivenColor);
+            var result =  CheckForSequence(allIndexesOfGivenColor);
+            if (result)
+                GameResutl = GameWinnerEnum.Player1Won;
+            else if (GameBoard.FirstOrDefault(x => x.Color.ColorId == 0) == null)
+                GameResutl = GameWinnerEnum.Player2Won;
+
+            if (GameResutl == GameWinnerEnum.NotYet)
+                return false;
+            return true;
 
         }
 
